@@ -7,6 +7,8 @@ async function scrape(url) {
   });
   const page = await browser.newPage();
 
+  await page.setDefaultNavigationTimeout(0);
+
   //optional
   await page.setRequestInterception(true);
   page.on("request", req => {
