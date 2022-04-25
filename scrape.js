@@ -2,8 +2,11 @@
 const puppeteer = require("puppeteer");
 
 async function scrape(url) {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    headless: false,
+  });
   const page = await browser.newPage();
+  //await page.setRequestInterception(true);
   await page.goto(url);
 
   const [el] = await page.$x(
