@@ -22,6 +22,12 @@ async function scrape(url) {
 
   await page.goto(url);
 
+  // Waits until the `title` meta element is rendered
+  await page.waitForSelector("title");
+
+  const title = await page.title();
+  console.info(`The title is: ${title}`);
+
   const [el] = await page.$x(
     "/html/body/main/div[3]/div/div/div/div/div/div[1]/div/div/div[1]/div/h1/span[2]"
   );
