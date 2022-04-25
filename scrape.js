@@ -7,7 +7,7 @@ async function scrape(url) {
   await page.goto(url);
 
   const [el] = await page.$x(
-    '//*[@id="content"]/div[3]/div/div/div/div/div/div[1]/div/div/div[1]/div/h1/span[2]'
+    "/html/body/main/div[3]/div/div/div/div/div/div[1]/div/div/div[1]/div/h1/span[2]"
   );
   const txt = await el.getProperty("textContent");
   const rawTxt = await txt.jsonValue();
