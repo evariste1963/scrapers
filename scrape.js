@@ -6,7 +6,18 @@ async function scrape(url) {
     headless: false,
   });
   const page = await browser.newPage();
-  //await page.setRequestInterception(true);
+
+  //optional
+  await page.setRequestInterception(true);
+  page.on("request", req => {
+    if (req.resourceType() == "font" || req.resourceType() == "image") {
+      req.abort();
+    } else {
+      req.continue();
+    }
+  });
+  // end of optional
+
   await page.goto(url);
 
   const [el] = await page.$x(
